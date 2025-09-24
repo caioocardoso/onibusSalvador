@@ -1,0 +1,68 @@
+Table Empresa {
+  name varchar(30)
+}
+
+Table Passageiro {
+  cpf varchar(12) [not null]
+}
+
+Table Funcionario {
+  cpf varchar(12) [not null]
+}
+
+Table Motorista {
+  cpf varchar(12) [not null]
+}
+
+Table Cobrador {
+  cpf varchar(12) [not null]
+}
+
+Table Cartao {
+  idCartao integer [primary key]
+}
+
+Table tipoPassagem {
+  valor float
+}
+
+Table Veiculo {
+  placa varchar(7)
+}
+
+Table Linha {
+  idItinerario integer
+}
+
+Table Itinerario {
+  id integer [primary key]
+}
+
+Table Bairro {
+  nome varchar(100)
+}
+
+Table Estacao {
+  nome varchar(100)
+}
+
+Table Ponto {
+  seila varchar(100)
+}
+
+Table Passagem {
+  naoseitambem varchar(100)
+}
+
+Table TipoPassagem {
+  nome varchar(10)
+}
+
+Table Consorcio {
+  consorcios a
+}
+
+Table Viagem {
+  saida varchar(100)
+  chegada varchar(100)
+}
