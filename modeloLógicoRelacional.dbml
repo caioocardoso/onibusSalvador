@@ -1,25 +1,44 @@
 Table Empresa {
-  name varchar(30)
+  id integer [primary key]
+  nome varchar(30)
 }
 
 Table Passageiro {
+  id integer [primary key]
+  nome varchar(200)
   cpf varchar(12) [not null]
 }
 
 Table Funcionario {
-  cpf varchar(12) [not null]
+  id integer [primary key]
+  nome varchar(200)
+  cpf varchar(12)
+  cnpj varchar(14)
+  data_adimissao datetime [not null]
+  data_demissao datetime [not null]
 }
 
 Table Motorista {
-  cpf varchar(12) [not null]
+  id integer [primary key]
+  id_funcionario integer [not null]
+  cnh varchar(10) [not null]
 }
 
 Table Cobrador {
-  cpf varchar(12) [not null]
+  id integer [primary key]
+  id_funcionario integer [not null]
 }
 
 Table Cartao {
-  idCartao integer [primary key]
+  id integer [primary key]
+  numero varchar(16) [not null]
+  id_tipo_cartao integer [not null]
+  id_empresa_responsavel integer [not null]
+}
+
+Table TipoCartao{
+  id integer [primary key]
+  descricao varchar(100) [not null]
 }
 
 Table tipoPassagem {
