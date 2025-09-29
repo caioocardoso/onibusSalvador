@@ -145,3 +145,33 @@ Table Viagem {
   data_horario_saida datetime
   data_horario_chegada datetime
 }
+
+Ref: Motorista.id_funcionario > Funcionario.id
+Ref: Cobrador.id_funcionario > Funcionario.id
+Ref: PassageiroCartao.id_passageiro > Passageiro.id
+Ref: PassageiroCartao.id_cartao > Cartao.id
+Ref: Cartao.id_empresa_responsavel > Empresa.id
+Ref: Cartao.id_tipo_passagem > TipoPassagem.id
+Ref: Passagem.id_cartao > Cartao.id
+Ref: RegistroTurnoVeiculo.id_veiculo > Veiculo.id
+Ref: RegistroTurnoVeiculo.id_motorista > Motorista.id
+Ref: RegistroTurnoVeiculo.id_cobrador > Cobrador.id
+Ref: RegistroTurnoVeiculo.id_linha > Linha.id
+Ref: Linha.idItinerario > Itinerario.id
+Ref: Itinerario.id_endereco_saida > Endereco.id
+Ref: Itinerario.id_endereco_chegada > Endereco.id
+Ref: Itinerario.id_ponto > Ponto.id
+Ref: Endereco.id_bairro > Bairro.id
+Ref: Localizacao.id_endereco > Endereco.id
+Ref: Estacao.id_localizacao > Localizacao.id
+Ref: Estacao.id_plataforma > Plataforma.id
+Ref: Plataforma.id_linha > Linha.id
+Ref: Ponto.id_localizacao > Localizacao.id
+Ref: Consorcio.id_empresa > Empresa.id
+Ref: Consorcio.id_linha > Linha.id
+Ref: Viagem.id_ponto_saida > Ponto.id
+Ref: Viagem.id_ponto_chegada > Ponto.id
+Ref: Viagem.id_passagem > Passagem.id
+Ref: Viagem.id_registro_turno_veiculo > RegistroTurnoVeiculo.id
+Ref: Viagem.id_passageiro > Passageiro.id
+Ref: Viagem.id_linha > Linha.id
