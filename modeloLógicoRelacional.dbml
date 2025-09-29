@@ -1,6 +1,8 @@
 Table Empresa {
   id integer [primary key]
-  nome varchar(30)
+  id_veiculo integer
+  cpnj varchar(14) [not null]
+  nome varchar(30) [not null]
 }
 
 Table Passageiro {
@@ -29,59 +31,117 @@ Table Cobrador {
   id_funcionario integer [not null]
 }
 
+Table PassageiroCartao{
+  id integer [primary key]
+  id_passageiro integer [not null]
+  id_cartao integer [not null]
+}
+
 Table Cartao {
   id integer [primary key]
   numero varchar(16) [not null]
-  id_tipo_cartao integer [not null]
+  status_cartao varchar(20) [not null]
   id_empresa_responsavel integer [not null]
+  id_tipo_passagem integer [not null]
 }
 
-Table TipoCartao{
+Table Passagem{
   id integer [primary key]
+  id_cartao integer
+  flag_a_vista bit
+  flag_integracao bit
+}
+
+Table TipoPassagem {
+  id integer [primary key]
+  valor float [not null]
   descricao varchar(100) [not null]
 }
 
-Table tipoPassagem {
-  valor float
+Table Veiculo {
+  id integer [primary key]
+  modelo varchar(16) [not null]
+  placa varchar(7) [not null]
 }
 
-Table Veiculo {
-  placa varchar(7)
+Table RegistroTurnoVeiculo{
+  id integer [primary key]
+  id_veiculo integer [not null]
+  id_motorista integer [not null]
+  id_cobrador integer [not null]
+  id_linha integer [not null]
+  data_horario_entrada datetime [not null]
+  data_horario_saida datetime
 }
 
 Table Linha {
+  id integer [primary key]
   idItinerario integer
+  horario datetime
+  codigo integer
+  nome varchar(200)
 }
 
 Table Itinerario {
   id integer [primary key]
+  id_endereco_saida integer [not null]
+  id_endereco_chegada integer [not null]
+  id_ponto integer [not null]
+}
+
+Table Endereco{
+  id integer [not null]
+  cep varchar(8) [not null]
+  rua varchar(100) [not null]
+  id_bairro integer [not null]
+}
+
+Table Localizacao{
+  id integer [not null]
+  id_endereco integer [not null]
+  latitude float [not null]
+  longitude float [not null]
 }
 
 Table Bairro {
+  id integer [primary key]
   nome varchar(100)
+  estado varchar(2) [not null]
+  cidade varchar(100) [not null]
 }
 
 Table Estacao {
-  nome varchar(100)
+  id integer [not null]
+  id_localizacao integer [not null]
+  id_plataforma integer [not null]
+  nome varchar(100) [not null]
+}
+
+Table Plataforma{
+  id integer [not null]
+  id_linha integer [not null]
+  codigo varchar(1) [not null]
 }
 
 Table Ponto {
-  seila varchar(100)
-}
-
-Table Passagem {
-  naoseitambem varchar(100)
-}
-
-Table TipoPassagem {
-  nome varchar(10)
+  id integer [not null]
+  id_localizacao integer [not null]
 }
 
 Table Consorcio {
-  consorcios a
+  id integer [primary key]
+  id_empresa integer 
+  id_linha integer
 }
 
 Table Viagem {
-  saida varchar(100)
-  chegada varchar(100)
+  id integer [primary key]
+  id_ponto_saida integer [not null]
+  id_ponto_chegada integer [not null]
+  id_passagem integer [not null]
+  id_registro_turno_veiculo integer [not null]
+  id_passageiro integer [not null]
+  id_linha integer [not null]
+  data_horario_saida datetime
+  data_horario_chegada datetime
 }
