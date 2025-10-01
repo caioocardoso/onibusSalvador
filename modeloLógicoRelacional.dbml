@@ -86,18 +86,17 @@ Table Itinerario {
   id integer [primary key]
   id_endereco_saida integer [not null]
   id_endereco_chegada integer [not null]
-  id_ponto integer [not null]
 }
 
 Table Endereco{
-  id integer [not null]
+  id integer [primary key]
   cep varchar(8) [not null]
   rua varchar(100) [not null]
   id_bairro integer [not null]
 }
 
 Table Localizacao{
-  id integer [not null]
+  id integer [primary key]
   id_endereco integer [not null]
   latitude float [not null]
   longitude float [not null]
@@ -111,21 +110,28 @@ Table Bairro {
 }
 
 Table Estacao {
-  id integer [not null]
+  id integer [primary key]
   id_localizacao integer [not null]
   id_plataforma integer [not null]
   nome varchar(100) [not null]
 }
 
 Table Plataforma{
-  id integer [not null]
+  id integer [primary key]
   id_linha integer [not null]
   codigo varchar(1) [not null]
 }
 
 Table Ponto {
-  id integer [not null]
+  id integer [primary key]
   id_localizacao integer [not null]
+}
+
+Table ItinerarioPonto {
+  id_itinerario integer [primary key]
+  id_ponto integer [primary key]
+  id integer
+  ordem integer
 }
 
 Table Consorcio {
@@ -146,33 +152,34 @@ Table Viagem {
   data_horario_chegada datetime
 }
 
-Ref: Motorista.id_funcionario > Funcionario.id
-Ref: Cobrador.id_funcionario > Funcionario.id
+Ref: Motorista.id_funcionario - Funcionario.id
+Ref: Cobrador.id_funcionario - Funcionario.id
 Ref: PassageiroCartao.id_passageiro > Passageiro.id
-Ref: PassageiroCartao.id_cartao > Cartao.id
+Ref: PassageiroCartao.id_cartao - Cartao.id
 Ref: Cartao.id_empresa_responsavel > Empresa.id
-Ref: Empresa.id_veiculo > Veiculo.id
 Ref: Cartao.id_tipo_passagem > TipoPassagem.id
+Ref: Empresa.id_veiculo < Veiculo.id
 Ref: Passagem.id_cartao > Cartao.id
 Ref: RegistroTurnoVeiculo.id_veiculo > Veiculo.id
 Ref: RegistroTurnoVeiculo.id_motorista > Motorista.id
 Ref: RegistroTurnoVeiculo.id_cobrador > Cobrador.id
 Ref: RegistroTurnoVeiculo.id_linha > Linha.id
-Ref: Linha.idItinerario > Itinerario.id
+Ref: Linha.idItinerario < Itinerario.id
 Ref: Itinerario.id_endereco_saida > Endereco.id
 Ref: Itinerario.id_endereco_chegada > Endereco.id
-Ref: Itinerario.id_ponto > Ponto.id
 Ref: Endereco.id_bairro > Bairro.id
 Ref: Localizacao.id_endereco > Endereco.id
-Ref: Estacao.id_localizacao > Localizacao.id
-Ref: Estacao.id_plataforma > Plataforma.id
-Ref: Plataforma.id_linha > Linha.id
-Ref: Ponto.id_localizacao > Localizacao.id
-Ref: Consorcio.id_empresa > Empresa.id
-Ref: Consorcio.id_linha > Linha.id
+Ref: Estacao.id_localizacao < Localizacao.id
+Ref: Estacao.id_plataforma < Plataforma.id
+Ref: Plataforma.id_linha < Linha.id
+Ref: Ponto.id_localizacao - Localizacao.id
+Ref: Consorcio.id_empresa < Empresa.id
+Ref: Consorcio.id_linha < Linha.id
 Ref: Viagem.id_ponto_saida > Ponto.id
 Ref: Viagem.id_ponto_chegada > Ponto.id
-Ref: Viagem.id_passagem > Passagem.id
+Ref: Viagem.id_passagem - Passagem.id
 Ref: Viagem.id_registro_turno_veiculo > RegistroTurnoVeiculo.id
 Ref: Viagem.id_passageiro > Passageiro.id
 Ref: Viagem.id_linha > Linha.id
+Ref: Itinerario.id < ItinerarioPonto.id_itinerario
+Ref: Ponto.id > ItinerarioPonto.id_ponto
