@@ -48,6 +48,7 @@ Table Cartao {
 Table Passagem{
   id integer [primary key]
   id_cartao integer
+  id_tipo_passagem integer [not null]
   flag_a_vista bit
   flag_integracao bit
 }
@@ -160,6 +161,7 @@ Ref: Cartao.id_empresa_responsavel > Empresa.id
 Ref: Cartao.id_tipo_passagem > TipoPassagem.id
 Ref: Empresa.id_veiculo < Veiculo.id
 Ref: Passagem.id_cartao > Cartao.id
+Ref: Passagem.id_tipo_passagem > TipoPassagem.id
 Ref: RegistroTurnoVeiculo.id_veiculo > Veiculo.id
 Ref: RegistroTurnoVeiculo.id_motorista > Motorista.id
 Ref: RegistroTurnoVeiculo.id_cobrador > Cobrador.id
