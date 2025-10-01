@@ -112,13 +112,13 @@ Table Bairro {
 Table Estacao {
   id integer [primary key]
   id_localizacao integer [not null]
-  id_plataforma integer [not null]
   nome varchar(100) [not null]
 }
 
 Table Plataforma{
   id integer [primary key]
   id_linha integer [not null]
+  id_estacao integer [not null]
   codigo varchar(1) [not null]
 }
 
@@ -170,7 +170,7 @@ Ref: Itinerario.id_endereco_chegada > Endereco.id
 Ref: Endereco.id_bairro > Bairro.id
 Ref: Localizacao.id_endereco > Endereco.id
 Ref: Estacao.id_localizacao < Localizacao.id
-Ref: Estacao.id_plataforma < Plataforma.id
+Ref: Plataforma.id_estacao > Estacao.id
 Ref: Plataforma.id_linha < Linha.id
 Ref: Ponto.id_localizacao - Localizacao.id
 Ref: Consorcio.id_empresa < Empresa.id
@@ -181,5 +181,5 @@ Ref: Viagem.id_passagem - Passagem.id
 Ref: Viagem.id_registro_turno_veiculo > RegistroTurnoVeiculo.id
 Ref: Viagem.id_passageiro > Passageiro.id
 Ref: Viagem.id_linha > Linha.id
-Ref: Itinerario.id < ItinerarioPonto.id_itinerario
-Ref: Ponto.id > ItinerarioPonto.id_ponto
+Ref: Itinerario.id <> ItinerarioPonto.id_itinerario
+Ref: Ponto.id <> ItinerarioPonto.id_ponto
